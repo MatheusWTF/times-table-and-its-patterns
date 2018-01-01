@@ -2,14 +2,16 @@ canvas = document.querySelector('canvas');
   ctx = canvas.getContext('2d');
   canvas.width = 500;
   canvas.height = 500;
+  
+document.querySelector('#nm').addEventListener('change', (e)=>{
+  times = e.target.value;
+  draw(times)
+})
 
-times = 2;
-arr = makePoints(times);
-
-
-function draw(){
+function draw(times){
   background('white');
   makeCircle();
+  arr = makePoints(times);
   makeConection(arr, times);
 }
 
@@ -47,12 +49,11 @@ function makePoints(times){
 }
 
 function makeConection(arr, times){
-  for(i =0; i <= arr.length/2; i++){
+  for(i =0; i < arr.length/times; i++){
     ctx.beginPath();
-  ctx.moveTo(arr[i].x,arr[i].y);
-  ctx.lineTo(arr[i*times].x,arr[i*times].y);
-  ctx.lineWidth = 0.5;
-  ctx.stroke();
+    ctx.moveTo(arr[i].x,arr[i].y);
+    ctx.lineTo(arr[i*times].x,arr[i*times].y);
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
   }
 }
-draw();
